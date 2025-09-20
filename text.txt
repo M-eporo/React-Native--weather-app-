@@ -1,0 +1,90 @@
+*** Expoプロジェクトの立ち上げ ***
+
+1.プロジェクトの作成
+npx create-expo-app --template blank-typescript weather-app
+
+2.必要なパッケージをインストール
+npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar
+
+3.package.jsonにエントリーポイントを設定する
+"main": "expo-router/entry",
+
+4.app.jsonのschemaを設定する。
+"schema": "weather-app",
+
+5.babel.config.jsを作成する
+    module.exports = function(api) {
+        api.cache(true);
+        return (
+            presets: ["babel-preset-expo"],
+        );
+    };
+
+6.キャッシュをクリアして、プロジェクトを再起動する
+npx expo start --clear
+
+7.appディレクトリを作成する
+  index.tsとApp.tsxは削除する
+
+*** 環境変数 ***
+
+1.次のコマンドを実行
+npx expo install expo-constants
+npm install dotenv --save
+
+2.envを作成し環境変数を記載
+
+3.app.config.jsを作成、次のコードを記載する
+    import "dotenv/config";
+    export default ({config}) => ({
+        ...config,
+        extra: {
+            weatherApiKey: process.env.WEATHER_API_KEY
+        }
+    });
+
+4.環境変数を使うファイルでインポートする
+    import Constants from "expo-constants";
+    const { weatherApiKey } = Constants.expoConfig?.extra || {};
+    console.log(weatherApiKey);
+
+    = react-native-dotenvによる方法 =
+    1 :  .envファイルに環境変数を入力
+    2 : react-native-dotenvをインストール
+    3 : babel.config.jsに以下を設定。
+        module.exports = function (api) {
+            api.cache(true);
+            return {
+                presets: ['babel-preset-expo'],
+                plugins: [
+                ["module:react-native-dotenv", {
+                    "moduleName": "@env",
+                    "path": ".env",
+                    "blacklist": null,
+                    "whitelist": null,
+                    "safe": false,
+                    "allowUndefined": true
+                }]
+                ]
+            };
+        };
+    4 : env.d.tsをに型定義を作成
+        declare module "@env" {
+            export const API_KEY: string;
+        }
+    5 : tsconfig.ts に以下を設定が必要なこともある
+        "include": ["src", "env.d.ts"]
+
+    6 : 環境変数を使用するファイルでインポートする
+        import { API_KEY } from "@env";
+
+
+*** Next ***
+ルーティンの設定
+Redux、Firestore、api、Sqliteの設定
+apiをたたいて、ビューに反映させる
+
+*** 1 ***
+Expo router は、デフォルトエクスポートのReactコンポーネント出なければアンマッチルートになる
+
+
