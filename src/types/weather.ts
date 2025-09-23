@@ -1,4 +1,4 @@
-export type ResponseCurrentWeatherType = {
+export type ResponseWeatherType = {
     location: {
         name: string;
         region: string;
@@ -12,3 +12,7 @@ export type ResponseCurrentWeatherType = {
         }
     }
 };
+
+export type CurrentWeatherType = {
+    currentWeather: ResponseWeatherType
+}

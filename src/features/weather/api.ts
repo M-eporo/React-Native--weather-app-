@@ -1,17 +1,16 @@
 import Constants from "expo-constants";
 import axios, {AxiosError} from "axios";
-import type { ResponseCurrentWeatherType } from "../../types/responseCurrentWeather";
+import type { ResponseWeatherType } from "../../types/weather";
 
-type FetchCurrentWeather = (location: string) => Promise<ResponseCurrentWeatherType>
+type FetchCurrentWeather = (location: string) => Promise<ResponseWeatherType>
 
 const { weatherApiKey } = Constants.expoConfig?.extra || {};
-const URL = `https://api.weatherapi.com/v1/current.json?key=${weatherApiKey}&q=London&aqi=yes`;
 
-
-export const fetchCurrentWeather: FetchCurrentWeather = async (location) => {
+export const getWeatherData: FetchCurrentWeather = async (location) => {
+    const URL = `https://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${location}&days=3&aqi=yes&alerts=yes`;
     console.log(location);
     try {
-        const {data} = await axios.get<ResponseCurrentWeatherType>(URL);
+        const {data} = await axios.get<ResponseWeatherType>(URL);
         console.log(data);
         return data;
     } catch(error) {
