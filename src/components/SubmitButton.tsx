@@ -1,5 +1,4 @@
 import { Button, View } from 'react-native';
-import { fetchCurrentWeather } from '../features/weather/api';
 
 type Props = {
     onPress: () => void;
