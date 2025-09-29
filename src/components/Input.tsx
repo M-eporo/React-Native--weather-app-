@@ -5,11 +5,11 @@ import { getWeatherData } from "../features/weather/api";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { getWeather } from "../store/slices/weatherSlice";
 import { RootState } from "../store/store";
-import { ResponseWeatherType } from "../types/weather";
+import { ResponseCurrentWeatherType } from "../types/weather";
 
 const Input = () => {
   const [location, setLocation] = useState("");
-  const [weatherData, setWeatherData] = useState<ResponseWeatherType>();
+  const [weatherData, setWeatherData] = useState<ResponseCurrentWeatherType>();
 
   const dispatch = useAppDispatch();
   const currentWeather = useAppSelector(
@@ -23,7 +23,7 @@ const Input = () => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
         <TextInput
             style={styles.input}
             placeholder="Type Here Your Location"
@@ -48,6 +48,9 @@ const Input = () => {
 export default Input;
 
 const styles = StyleSheet.create({
+  container: {
+    marginBottom: 16,
+  },
   input: {
     height: 50,
     marginVertical: 12,

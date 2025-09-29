@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ResponseWeatherType } from "../../types/weather";
+import { ResponseCurrentWeatherType } from "../../types/weather";
 
 type CurrentWeatherType = {
-    currentWeather: ResponseWeatherType
+    currentWeather: ResponseCurrentWeatherType
 }
 
 const initialState: CurrentWeatherType = {
@@ -18,6 +18,16 @@ const initialState: CurrentWeatherType = {
                 text: "",
                 icon: "",
             }
+        },
+        forecast: {
+            forecastday: [
+            {
+                day: {
+                    maxTemp_c: 0,
+                    mintemp_c: 0,
+                }
+            }
+        ]
         }
     }
 };
@@ -26,7 +36,7 @@ export const weatherSlice = createSlice({
     name: "weather",
     initialState,
     reducers: {
-        getWeather: (state, action: PayloadAction<ResponseWeatherType>) => {
+        getWeather: (state, action: PayloadAction<ResponseCurrentWeatherType>) => {
             state.currentWeather = action.payload
         }
     }

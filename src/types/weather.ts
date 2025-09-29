@@ -1,4 +1,4 @@
-export type ResponseWeatherType = {
+export type ResponseCurrentWeatherType = {
     location: {
         name: string;
         region: string;
@@ -10,9 +10,19 @@ export type ResponseWeatherType = {
             text: string;
             icon: string;
         }
+    },
+    forecast: {
+        forecastday: [
+            {
+                day: {
+                    maxtemp_c: number,
+                    mintemp_c: number,
+                }
+            }
+        ]
     }
 };
 
 export type CurrentWeatherType = {
-    currentWeather: ResponseWeatherType
+    currentWeather: ResponseCurrentWeatherType
 }
