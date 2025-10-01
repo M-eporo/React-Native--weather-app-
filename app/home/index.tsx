@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import CurrentWeather from "../../src/components/CurrentWeather";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Input from "../../src/components/Input";
-import TimelyWeather from "../../src/components/TimelyWeather";
+import HourlyWeather from "../../src/components/HourlyWeather";
 
 export default function HomeScreen() {
     return (
@@ -12,12 +12,11 @@ export default function HomeScreen() {
                     Home Screen
                 </Text>
                 <Input />
-                <CurrentWeather/>
-                <TimelyWeather/>
+                <CurrentWeather />
+                <HourlyWeather />
             </View>
         </SafeAreaProvider>
     )
-
 }
 
 const styles = StyleSheet.create({

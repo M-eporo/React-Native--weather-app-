@@ -3,15 +3,14 @@ import Input from "./Input";
 import { useAppSelector } from "../store/hooks";
 import { RootState } from "../store/store";
 
-
 const CurrentWeather = () => {
-    const currentWeather = useAppSelector((state: RootState) => state.weather.currentWeather);
+    const currentWeather = useAppSelector((state: RootState) => state.currentData.currentWeather);
     return (
         <View style={styles.container}>
-            {currentWeather.location.name ?
+            {currentWeather.name ?
                 <View style={styles.inner}>
-                    <Text style={styles.location}>{currentWeather.location.name}</Text>
-                    <Text style={styles.temp}>{currentWeather.current.temp_c}℃</Text>
+                    <Text style={styles.location}>{currentWeather.name}</Text>
+                    <Text style={styles.temp}>{currentWeather.temp_c}℃</Text>
                     <View style={{flexDirection: "row", columnGap: 8, marginVertical: 8}}>
                         <View style={{flexDirection: "row", alignItems: "center"}}>
                             <View style={{alignItems: "center"}}>
@@ -21,7 +20,7 @@ const CurrentWeather = () => {
                                 </Text>
                             ))}
                             </View>
-                            <Text style={{fontSize: 26}}>{currentWeather.forecast.forecastday[0].day.maxtemp_c}℃</Text>
+                            <Text style={{fontSize: 26}}>{currentWeather.maxtemp_c}℃</Text>
                         </View>
                         <View style={{flexDirection: "row", alignItems: "center"}}>
                             <View style={{alignItems: "center"}}>
@@ -31,13 +30,13 @@ const CurrentWeather = () => {
                                 </Text>
                             ))}
                             </View>
-                            <Text style={{fontSize: 26}}>{currentWeather.forecast.forecastday[0].day.mintemp_c}℃</Text>
+                            <Text style={{fontSize: 26}}>{currentWeather.mintemp_c}℃</Text>
                         </View>
                     </View>
-                    <Text style={styles.condition}>{currentWeather.current.condition.text}</Text>
+                    <Text style={styles.condition}>{currentWeather.condition}</Text>
                     <Image 
                         source={{
-                            uri: `https:${currentWeather.current.condition.icon}`  
+                            uri: `https:${currentWeather.icon}`  
                         }}
                         style={{width: 100, height: 100, marginTop: 4}}
                         resizeMode="contain"

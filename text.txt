@@ -147,7 +147,7 @@ export function SubmitButton({ onPress }: { onPress: () => void }) {
 *** Next ***
 ルーティンの設定
 Redux、Firestore、api、Sqliteの設定
-apiをたたいて、ビューに反映させる
+24時間天気
 
 *** 1 ***
 Expo router は、デフォルトエクスポートのReactコンポーネント出なければアンマッチルートになる
