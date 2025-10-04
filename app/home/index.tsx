@@ -3,6 +3,7 @@ import CurrentWeather from "../../src/components/CurrentWeather";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Input from "../../src/components/Input";
 import HourlyWeather from "../../src/components/HourlyWeather";
+import WeeklyWeather from "../../src/components/WeeklyWeather";
 
 export default function HomeScreen() {
     return (
@@ -14,6 +15,7 @@ export default function HomeScreen() {
                 <Input />
                 <CurrentWeather />
                 <HourlyWeather />
+                <WeeklyWeather />
             </View>
         </SafeAreaProvider>
     )

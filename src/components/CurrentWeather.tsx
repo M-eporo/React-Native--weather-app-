@@ -11,21 +11,22 @@ const CurrentWeather = () => {
                 <View style={styles.inner}>
                     <Text style={styles.location}>{currentWeather.name}</Text>
                     <Text style={styles.temp}>{currentWeather.temp_c}℃</Text>
-                    <View style={{flexDirection: "row", columnGap: 8, marginVertical: 8}}>
+                    <View style={{flexDirection: "row", columnGap: 20, marginVertical: 8}}>
                         <View style={{flexDirection: "row", alignItems: "center"}}>
                             <View style={{alignItems: "center"}}>
                             {["M", "A", "X"].map((char, index) => (
-                                <Text key={index} style={{height: 12,fontSize: 12, fontWeight: 600, lineHeight: 10}}>
+                                <Text key={index} style={styles.verticalText}>
                                     {char}
                                 </Text>
                             ))}
                             </View>
                             <Text style={{fontSize: 26}}>{currentWeather.maxtemp_c}℃</Text>
                         </View>
-                        <View style={{flexDirection: "row", alignItems: "center"}}>
+                        <View style={{flexDirection: "row", alignItems: "center"}}> 
+                            
                             <View style={{alignItems: "center"}}>
                             {["M","I","N"].map((char, index) => (
-                                <Text key={index} style={{height: 12, fontSize: 12, fontWeight: 600, lineHeight: 10}}>
+                                <Text key={index} style={styles.verticalText}>
                                     {char}
                                 </Text>
                             ))}
@@ -43,7 +44,7 @@ const CurrentWeather = () => {
                     />
                 </View>
                 :
-                <Text style={{fontSize: 16}}>No weather data. Please Input Your Location.</Text>
+                <Text style={styles.alertText}>No weather data. Please Input Your Location.</Text>
             }
         </View>
     );
@@ -62,9 +63,20 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         paddingTop: 16, 
     },
+    alertText: {
+        paddingVertical: 24,
+        textAlign: "center"
+    },
     location: {
         fontSize: 32,
         fontWeight: "bold",
+    },
+    verticalText: {
+        height: 12, 
+        marginRight: 8, 
+        fontSize: 12, 
+        fontWeight: 600, 
+        lineHeight: 10
     },
     temp: {
         fontSize: 52,

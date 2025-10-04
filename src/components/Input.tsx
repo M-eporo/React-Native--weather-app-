@@ -1,6 +1,6 @@
 import { Button, ButtonText } from "@gluestack-ui/themed";
 import { useState } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 import { getWeatherData } from "../features/weather/api";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { setWeather } from "../store/slices/topWeatherSlice";
@@ -10,12 +10,13 @@ import { setHourlyWeather } from "../store/slices/hourlyWeatherSlice";
 
 const Input = () => {
   const [location, setLocation] = useState("");
+  const [currentTime, setCurrentTime] = useState(0);
 
   const dispatch = useAppDispatch();
   const currentWeather = useAppSelector(
     (state: RootState) => state.currentData.currentWeather
   );
-
+  
   const fetchWeather = async () => {
     const data = await getWeatherData(location);
 
@@ -29,7 +30,8 @@ const Input = () => {
       mintemp_c: data.forecast.forecastday[0].day.mintemp_c
     };
     
-    const currentTime = new Date().getHours();
+    setCurrentTime(Number(data.location.localtime.substring(11,13)));
+    
     const hourlyData = data.forecast.forecastday.flatMap((day, index) => {
       if(index === 0) {
         return day.hour.slice(currentTime, day.hour.length);
@@ -42,9 +44,13 @@ const Input = () => {
 
     const hourlyDataFormatted = hourlyData.map((hour, index) => {
       return {
-        time: index === 0 ? "Now" : hour.time.substring(12,14),
+        time: index === 0 ? "Now" : hour.time.substring(11,13),
         temp_c: hour.temp_c,
         icon: hour.condition.icon,
+        will_it_rain: hour.will_it_rain,
+        chance_of_rain: hour.chance_of_rain,
+        will_it_snow: hour.will_it_snow,
+        chance_of_snow: hour.chance_of_snow,
       }
     })
       
