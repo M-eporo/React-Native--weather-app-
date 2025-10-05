@@ -7,6 +7,7 @@ import { setWeather } from "../store/slices/topWeatherSlice";
 import { RootState } from "../store/store";
 import { TopWeatherItem } from "../types/topWeather";
 import { setHourlyWeather } from "../store/slices/hourlyWeatherSlice";
+import { setWeeklyWeather } from "../store/slices/weeklyWeatherSlice";
 
 const Input = () => {
   const [location, setLocation] = useState("");
@@ -52,10 +53,24 @@ const Input = () => {
         will_it_snow: hour.will_it_snow,
         chance_of_snow: hour.chance_of_snow,
       }
-    })
+    });
+
+    const weeklyData = data.forecast.forecastday.map((day, index) => {
+      return {
+        dayofweek: index === 0 ? "Today" : new Date(day.date).toLocaleString("en-US", { weekday: "short"}),
+        icon: day.day.condition.icon,
+        mintemp_c: day.day.mintemp_c,
+        maxtemp_c: day.day.maxtemp_c,
+        daily_will_it_rain: day.day.daily_will_it_rain,
+        daily_chance_of_rain: day.day.daily_chance_of_rain,
+        daily_will_it_snow: day.day.daily_will_it_snow,
+        daily_chance_of_snow: day.day.daily_chance_of_snow,
+      };
+    });
       
     dispatch(setWeather(topData));
     dispatch(setHourlyWeather(hourlyDataFormatted));
+    dispatch(setWeeklyWeather(weeklyData));
   };
 
   return (

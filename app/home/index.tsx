@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import CurrentWeather from "../../src/components/CurrentWeather";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Input from "../../src/components/Input";
@@ -8,7 +8,7 @@ import WeeklyWeather from "../../src/components/WeeklyWeather";
 export default function HomeScreen() {
     return (
         <SafeAreaProvider>
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <Text>
                     Home Screen
                 </Text>
@@ -16,7 +16,7 @@ export default function HomeScreen() {
                 <CurrentWeather />
                 <HourlyWeather />
                 <WeeklyWeather />
-            </View>
+            </ScrollView>
         </SafeAreaProvider>
     )
 }
