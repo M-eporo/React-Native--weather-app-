@@ -54,7 +54,7 @@ export default CurrentWeather;
 
 const styles = StyleSheet.create({
     container: {
-        marginVertical: 16,
+        marginTop: 16,
         borderRadius: 16,
         backgroundColor: "#eaeaea"
     },

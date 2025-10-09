@@ -57,14 +57,25 @@ const Input = () => {
 
     const weeklyData = data.forecast.forecastday.map((day, index) => {
       return {
-        dayofweek: index === 0 ? "Today" : new Date(day.date).toLocaleString("en-US", { weekday: "short"}),
+        date: day.date,
+        dayofweek: new Date(day.date).toLocaleString("en-US", { weekday: "short"}),
         icon: day.day.condition.icon,
         mintemp_c: day.day.mintemp_c,
         maxtemp_c: day.day.maxtemp_c,
+        avgtemp_c: day.day.avgtemp_c,
+        maxwind_kph: day.day.maxwind_kph,
+        totalprecip_mm: day.day.totalprecip_mm,
+        avgvis_km: day.day.avgvis_km,
+        avghumidity: day.day.avghumidity,
         daily_will_it_rain: day.day.daily_will_it_rain,
         daily_chance_of_rain: day.day.daily_chance_of_rain,
         daily_will_it_snow: day.day.daily_will_it_snow,
         daily_chance_of_snow: day.day.daily_chance_of_snow,
+        sunrise: day.astro.sunrise,
+        sunset: day.astro.sunset,
+        moonrise: day.astro.moonrise,
+        moonset: day.astro.moonset,
+        moon_phase: day.astro.moon_phase,
       };
     });
       

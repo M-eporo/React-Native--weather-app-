@@ -8,7 +8,12 @@ import WeeklyWeather from "../../src/components/WeeklyWeather";
 export default function HomeScreen() {
     return (
         <SafeAreaProvider>
-            <ScrollView style={styles.container}>
+            <ScrollView 
+                style={styles.container}
+                contentContainerStyle={{
+                    paddingBottom: 32
+                }}
+            >
                 <Text>
                     Home Screen
                 </Text>

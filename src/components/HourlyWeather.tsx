@@ -8,10 +8,12 @@ export default function TimelyWeather() {
 
     return (
         <View style={styles.container}>
+            <Text>Hourly Weather</Text>
                 {hourlyWeather.length <= 0 ?
                     <Text style={styles.alertText}>No Hour Data Available. Please Enter Your Location.</Text>
                 :
                 <ScrollView style={styles.horizontalScroll} horizontal>
+                    
                     {hourlyWeather.map((hour: HourlyWeatherItem, index: number) => (
                         <View key={hour.time} style={styles.hourContainer}>
                             <Text style={styles.time}>{hour.time}</Text>
@@ -33,6 +35,7 @@ export default function TimelyWeather() {
 
 const styles = StyleSheet.create({
     container: {
+        marginTop: 16,
         paddingVertical: 8,
         paddingHorizontal: 16,
         borderRadius: 16,

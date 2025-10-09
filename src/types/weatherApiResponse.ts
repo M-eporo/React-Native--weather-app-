@@ -47,6 +47,13 @@ export type WeatherApiResponse= {
                     icon: string;
                 };
             };
+            astro: {
+                sunrise: string;
+                sunset: string;
+                moonrise: string;
+                moonset: string;
+                moon_phase: string;
+            };
             hour: {
                 time: string;
                 temp_c: number;
