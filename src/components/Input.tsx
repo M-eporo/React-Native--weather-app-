@@ -65,6 +65,7 @@ const Input = () => {
         avgtemp_c: day.day.avgtemp_c,
         maxwind_kph: day.day.maxwind_kph,
         totalprecip_mm: day.day.totalprecip_mm,
+        totalsnow_cm: 0,
         avgvis_km: day.day.avgvis_km,
         avghumidity: day.day.avghumidity,
         daily_will_it_rain: day.day.daily_will_it_rain,

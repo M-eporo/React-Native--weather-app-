@@ -7,6 +7,7 @@ export type WeeklyWeatherItem = {
     avgtemp_c: number;
     maxwind_kph: number;
     totalprecip_mm: number;
+    totalsnow_cm: number;
     avgvis_km: number;
     avghumidity: number;
     daily_will_it_rain: boolean;
