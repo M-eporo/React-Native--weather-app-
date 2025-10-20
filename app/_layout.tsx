@@ -4,11 +4,13 @@ import { Provider } from "react-redux";
 import { store } from "../src/store/store";
 import { GluestackUIProvider } from "@gluestack-ui/themed";
 import { config} from "@gluestack-ui/config";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function Layout() {
     return (
         <Provider store={store}>
             <GluestackUIProvider config={config}>
+                <SafeAreaProvider>
                 <Stack
                     screenOptions={{
                         headerStyle: {
@@ -20,18 +22,12 @@ export default function Layout() {
                         }
                     }}
                 >
-                    <Stack.Screen name="index" options={{headerShown: false}} />
-                    <Stack.Screen name="home/index" options={{
-                            title: "Home", 
-                            headerRight: () => <Button onPress={() => router.push("/setting")} title="設定" />
-                        }} 
-                    />
-                    <Stack.Screen name="setting/index" options={{
-                            title: "Setting",
-                            //headerRight: () => <Button onPress={() => router.back()} title="戻る" />
-                        }}
+                    <Stack.Screen
+                        name="(tab)"
+                        options={{ headerShown: false }}
                     />
                 </Stack>
+                </SafeAreaProvider>
             </GluestackUIProvider>
         </Provider>
     );

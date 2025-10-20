@@ -142,12 +142,26 @@ export function SubmitButton({ onPress }: { onPress: () => void }) {
 普通の Tailwind のように className="bg-blue-500 p-4" も、
 さらに gluestack 独自の variant / size / action プロップでテーマ管理ができます
 従来のようにstyle={{}}でも可能。
+
+
+*************************************************************************
+
+*** Tabs.Screen ***
+Tabs.Screenに渡すname属性は、相対パスではない。
+これはファイル構造に基づいた命名規則。
+name には ファイルツリー上の位置 をそのまま書く。
+
+*** Stack.Screens ***
+こちらもTabs.Screenと同じ
+
+
 *************************************************************************
 
 *** Next ***
 ルーティンの設定
-Redux、Firestore、api、Sqliteの設定
-24時間天気
+Firestore、Sqliteの設定
+24時間天気の時間の設定がおかしい
+
 
 *** 1 ***
 Expo router は、デフォルトエクスポートのReactコンポーネント出なければアンマッチルートになる

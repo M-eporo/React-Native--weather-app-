@@ -6,14 +6,13 @@ import { useRef, useState } from "react";
 import { Expand } from "./Expand";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { moons } from "../utils/moonShape";
+import { ExpandControl } from "./ExpandCotrol";
 
 export default function WeeklyWeather() {
     const weeklyWeather = useAppSelector((state: RootState) => state.weeklyData.weeklyWeather);
     const [openIndex, setOpenIndex] = useState<number | null>(null);
     const [moon, setMoon] = useState("");
-
-
-
+    
     const handleToggle = (index: number) => {
         setOpenIndex((prev) => (prev === index ? null : index));
     };
@@ -41,9 +40,15 @@ export default function WeeklyWeather() {
                                 {day.daily_will_it_rain && <Text>{`${day.daily_chance_of_rain}%`}</Text>}
                                 {day.daily_will_it_snow && <Text>{`${day.daily_chance_of_snow}%`}</Text>}
                             </View>)}
+                            
                             <TouchableOpacity style={styles.icons} onPress={() => handleToggle(index)}>
-                                <AntDesign name="plus" size={20} color="black" />
+                                
+                                <ExpandControl isOpen={index === openIndex} >
+                                    <AntDesign name="plus" size={20} color="black" />
+                                </ExpandControl>
+                                
                             </TouchableOpacity>
+                            
                         </View>
                         <Expand isOpen={index === openIndex}>
                             <View>
@@ -91,8 +96,6 @@ export default function WeeklyWeather() {
                                 size={24} 
                                 color="gold" 
                             />
-                            
-
                         </Expand>
                     </View>
                 ))}
@@ -125,6 +128,6 @@ const styles = StyleSheet.create({
     img: {},
     icons: {
         flexDirection: "row",
-        backgroundColor: "#fff",
+        //transform: "rotate(0deg)"
     },
 })
