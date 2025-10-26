@@ -89,7 +89,7 @@ const Input = () => {
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder="Type Here Your Location"
+        placeholder="Enter City Name"
         onChangeText={(newLocation) => setLocation(newLocation)}
         defaultValue={location}
       />

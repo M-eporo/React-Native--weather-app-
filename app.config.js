@@ -4,5 +4,8 @@ export default ({config}) => ({
     ...config,
     extra: {
         weatherApiKey: process.env.WEATHER_API_KEY
-    }
+    },
+    "plugins": [
+        "expo-sqlite"
+    ]
 });

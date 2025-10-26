@@ -7,6 +7,7 @@ import { Expand } from "./Expand";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { moons } from "../utils/moonShape";
 import { ExpandControl } from "./ExpandCotrol";
+import { ScrollView } from "@gluestack-ui/themed";
 
 export default function WeeklyWeather() {
     const weeklyWeather = useAppSelector((state: RootState) => state.weeklyData.weeklyWeather);
@@ -51,51 +52,56 @@ export default function WeeklyWeather() {
                             
                         </View>
                         <Expand isOpen={index === openIndex}>
-                            <View>
+                            <View style={styles.detailItem}>
                                 <MaterialCommunityIcons name="weather-sunset" size={24} color="red" />
-                                <Text>Sunrise at {day.sunrise}</Text>
-                                <Text>Sunset at {day.sunset}</Text>
+                                <View>
+                                    <Text>Sunrise at {day.sunrise}</Text>
+                                    <Text>Sunset at {day.sunset}</Text>
+                                </View>
                             </View>
-                            <View>
+                            <View style={styles.detailItem}>
                                 <MaterialCommunityIcons name="weather-moonset" size={24} color="gold" />
-                                <Text>Moonrise at {day.moonrise}</Text>
-                                <Text>Moonset at {day.moonset}</Text>
+                                <View>
+                                    <Text>Moonrise at {day.moonrise}</Text>
+                                    <Text>Moonset at {day.moonset}</Text>
+                                </View>
                             </View>
                             {day.daily_will_it_rain || day.daily_will_it_snow && (
                                 <View>
                                     {day.daily_will_it_rain && (
-                                        <View>
+                                        <View style={styles.detailItem}>
                                             <MaterialCommunityIcons name="weather-pouring" size={24} color="blue" />
                                             <Text>Total precip {day.totalprecip_mm}mm</Text>
                                         </View>
                                     )}
                                     {day.daily_will_it_rain && (
-                                        <View>
+                                        <View style={styles.detailItem}>
                                             <MaterialCommunityIcons name="weather-snowy" size={24} color="white" />
                                             <Text>Total snow {day.totalsnow_cm}cm</Text>
                                         </View>
                                     )}
                                 </View>
                             )}
-                            <View>
+                            <View style={styles.detailItem}>
                                 <MaterialCommunityIcons name="weather-dust" size={24} color="green" />
                                 <Text>Max wind {day.maxwind_kph}kph</Text>
                             </View>
-                            <View>
+                            <View style={styles.detailItem}>
                                 <MaterialCommunityIcons name="water-thermometer-outline" size={24} color="lightblue" />
                                 <Text>Avg humidity {day.avghumidity}%</Text>
                             </View>
-                            <View>
+                            <View style={styles.detailItem}>
                                 <MaterialCommunityIcons name="weather-fog" size={24} color="gray" />
                                 <Text>Avg Visibility {day.avgvis_km}km</Text>
                             </View>
-                            <Text>{day.moon_phase}</Text>
-                            
-                            <MaterialCommunityIcons 
-                                name={moons.find(moon => moon.name === day.moon_phase)?.type}
-                                size={24} 
-                                color="gold" 
-                            />
+                            <View style={styles.detailItem}>
+                                <MaterialCommunityIcons 
+                                    name={moons.find(moon => moon.name === day.moon_phase)?.type}
+                                    size={24} 
+                                    color="gold" 
+                                />
+                                <Text>{day.moon_phase}</Text>
+                            </View>
                         </Expand>
                     </View>
                 ))}
@@ -119,7 +125,6 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         borderColor: "#aeaeae",
         borderBottomWidth: 1,
-        
     },
     date: {
         
@@ -128,6 +133,16 @@ const styles = StyleSheet.create({
     img: {},
     icons: {
         flexDirection: "row",
-        //transform: "rotate(0deg)"
     },
+
+    detailItem: {
+        minHeight: 54,
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 16,
+        paddingVertical: 8,
+        paddingHorizontal: 4,
+        borderBottomWidth: 1,
+        borderBottomColor: "#aaa",
+    }
 })

@@ -157,10 +157,35 @@ name には ファイルツリー上の位置 をそのまま書く。
 
 *************************************************************************
 
+*************************************************************************
+
+*** SQLite ***
+
+**getAllAsync(source:string, params:SQLiteBinfParams)
+  Returns:Promise<T[]>
+
+  // For unnamed parameters, you pass values in an array.
+db.getAllAsync('SELECT * FROM test WHERE intValue = ? AND name = ?', [1, 'Hello']);
+
+// For unnamed parameters, you pass values in variadic arguments.
+db.getAllAsync('SELECT * FROM test WHERE intValue = ? AND name = ?', 1, 'Hello');
+
+// For named parameters, you should pass values in object.
+db.getAllAsync('SELECT * FROM test WHERE intValue = $intValue AND name = $name', { $intValue: 1, $name: 'Hello' });
+
+**withTransactionAsync(task: () => Promice<void>)
+  task = An async function to execute within a transaction.
+  Retunrs: Promice<void>
+Execute a transaction and automatically commit/rollback based on the task result.
+  
+
+*************************************************************************
+
 *** Next ***
 ルーティンの設定
 Firestore、Sqliteの設定
 24時間天気の時間の設定がおかしい
+お気に入りリストの並び替え
 
 
 *** 1 ***
