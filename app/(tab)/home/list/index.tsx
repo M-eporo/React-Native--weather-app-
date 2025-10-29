@@ -1,30 +1,32 @@
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Input from "../../../../src/components/Input";
+import { useEffect, useState } from "react";
+import { useNavigation } from "expo-router";
+import { ResponseModal } from "../../../../src/components/ResponseModal";
 
 export default function ListScreen() {
-
+    const [showModal, setShowModal] = useState(false);
+    const navigation = useNavigation();
+    useEffect(() => {
+        navigation.setOptions({
+            headerBackVisible: true,
+            headerTitleAlign: "center",
+        })
+    }, []);
 
     return (
-        <SafeAreaView>
+        <View style={styles.container}>
+            <Input setShowModal={setShowModal}/>
             <View>
-                <Input />
+                <ResponseModal showModal={showModal} setShowModal={setShowModal}/>
             </View>
-            <ScrollView>
-            <View>
-                <Text style={styles.regionName}></Text>
-            </View>
-        </ScrollView>
-        </SafeAreaView>
-        
-        
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
-    regionName: {
-        fontSize: 18,
-        fontWeight: "bold",
+    container: {
+        padding: 16,
     }
 })
