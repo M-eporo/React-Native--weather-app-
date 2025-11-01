@@ -54,6 +54,8 @@ const getRegionById = async (id: number): Promise<FavoriteRegion | undefined> =>
     };
 };
 
+
+
 /**
  * お気に入り地域を追加
  * @param newRegion 
@@ -87,3 +89,17 @@ const updateViewCount = async(id: number): Promise<void> => {
         params: [id]
     });
 };
+
+const resetSequence = async () => {
+    await execute({ sql: RegionQueries.RESET_SEQUENCE})
+};
+
+export const regionService = Object.freeze({
+    createTable,
+    getRegions,
+    getRegionById,
+    addRegion,
+    deleteRegion,
+    updateViewCount,
+    resetSequence,
+});

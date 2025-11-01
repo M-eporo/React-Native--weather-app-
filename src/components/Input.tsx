@@ -10,7 +10,7 @@ import { setHourlyWeather } from "../store/slices/hourlyWeatherSlice";
 import { setWeeklyWeather } from "../store/slices/weeklyWeatherSlice";
 
 type Props = {
-    setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowModal?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Input = ({ setShowModal }: Props) => {
@@ -83,11 +83,11 @@ const Input = ({ setShowModal }: Props) => {
         moon_phase: day.astro.moon_phase,
       };
     });
-      
+    
     dispatch(setWeather(topData));
     dispatch(setHourlyWeather(hourlyDataFormatted));
     dispatch(setWeeklyWeather(weeklyData));
-    setShowModal(true);
+    setShowModal && setShowModal(true);
   };
 
   return (

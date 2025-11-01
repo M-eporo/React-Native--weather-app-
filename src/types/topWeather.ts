@@ -1,6 +1,6 @@
 export type TopWeatherItem = {
     name: string;
-    country: string;
+    country: string; 
     temp_c: number;
     condition: string;
     icon: string;

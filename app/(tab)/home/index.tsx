@@ -11,6 +11,7 @@ export default function HomeScreen() {
                 paddingBottom: 32
             }}
         >
+            
             <Input />
             <CurrentWeather />
             <HourlyWeather />

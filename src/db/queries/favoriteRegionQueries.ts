@@ -76,6 +76,13 @@ const DeleteRegionById = `
     WHERE id = ?;
 `;
 
+const ResetSequence = `
+    DELETE FROM 
+        sqlite_sequence
+    WHERE 
+        name = "regions;
+`;
+
 const RegionQueries = Object.freeze({
     CREATE_TABLE: CreateTableRegions,
     SELECT_ALL: SelectRegions,
@@ -83,6 +90,9 @@ const RegionQueries = Object.freeze({
     INSERT_REGION: InsertRegion,
     UPDATE_REGION_VIEW_COUNT: UpdateRegionViewCount,
     DELETE_REGION: DeleteRegionById,
+    RESET_SEQUENCE: ResetSequence
 });
+
+
 
 export { RegionQueries };

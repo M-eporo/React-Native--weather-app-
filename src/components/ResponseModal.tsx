@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { Modal, Pressable, StyleSheet, Text } from "react-native"
+import { Alert, Modal, Pressable, StyleSheet, Text } from "react-native"
 import { View } from "react-native"
 import CurrentWeather from "./CurrentWeather";
 import HourlyWeather from "./HourlyWeather";
 import WeeklyWeather from "./WeeklyWeather";
-import { RootState } from "../store/store";
 import { ScrollView } from "@gluestack-ui/themed";
+import { regionService } from "../services/regionService";
+import { useAppSelector } from "../store/hooks";
+import { RootState } from "../store/store";
+import { router } from "expo-router";
 
 type Props = {
     showModal: boolean;
@@ -13,7 +16,23 @@ type Props = {
 }
 
 export const ResponseModal = ({ showModal, setShowModal }: Props) => {
+    const currentWeather = useAppSelector((state: RootState) => state.currentData.currentWeather);
     
+    const onPressAdd = async () => {
+        try {
+            await regionService.addRegion(currentWeather.name);
+            setShowModal(false);
+            router.replace("/('tab)/home");
+        } catch(error) {
+            Alert.alert("Error", "Failed to add new region.", [
+                {
+                    text: "OK",
+                    onPress: () => setShowModal(false)
+                }
+            ]);
+        }
+    };
+
     return (
         <Modal
             animationType="slide"
