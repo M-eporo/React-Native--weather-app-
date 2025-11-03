@@ -20,10 +20,12 @@ export const ResponseModal = ({ showModal, setShowModal }: Props) => {
     
     const onPressAdd = async () => {
         try {
+            console.log(currentWeather.name);
             await regionService.addRegion(currentWeather.name);
             setShowModal(false);
             router.replace("/('tab)/home");
         } catch(error) {
+            console.error(error.message);
             Alert.alert("Error", "Failed to add new region.", [
                 {
                     text: "OK",
@@ -55,9 +57,7 @@ export const ResponseModal = ({ showModal, setShowModal }: Props) => {
                         <Text style={styles.buttonText}>Cancel</Text>
                     </Pressable>
                     <Pressable
-                        onPress={() => {
-                            
-                        }}
+                        onPress={onPressAdd}
                     >
                         <Text style={styles.buttonText}>Add</Text>
                     </Pressable>

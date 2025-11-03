@@ -6,7 +6,6 @@ import { useNavigation } from "expo-router";
 import { ResponseModal } from "../../../../src/components/ResponseModal";
 import { RootState } from "../../../../src/store/store";
 import { useAppSelector } from "../../../../src/store/hooks";
-import { FavoriteRegion } from "../../../../src/types/favoriteRegion";
 
 export default function ListScreen() {
     const [showModal, setShowModal] = useState(false);
@@ -21,7 +20,7 @@ export default function ListScreen() {
     }, []);
 
     return (
-        <View>
+        <View style={styles.container}>
             <View>
                 <Input setShowModal={setShowModal}/>
                 <View>
@@ -38,6 +37,7 @@ export default function ListScreen() {
                 )}
                 keyExtractor={(item) => item.id.toString()}
             />
+            <ResponseModal showModal={showModal} setShowModal={setShowModal} />
         </View>
     );
 };

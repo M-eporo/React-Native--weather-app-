@@ -7,7 +7,9 @@ import { FavoriteRegion } from "../types/favoriteRegion";
  * お気に入り地域テーブル作成
  */
 const createTable = async () => {
+    console.log("Creating regions table...");
     await execute({ sql: RegionQueries.CREATE_TABLE })
+    console.log("Table created!");
 };
 
 /**
