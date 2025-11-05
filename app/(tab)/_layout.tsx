@@ -15,7 +15,7 @@ export default function TabsLayout() {
                 }}
             />
             <Tabs.Screen
-                name="setting/index"
+                name="setting"
                 options={{
                     title:"Setting",
                     // headerShown: true,

@@ -1,13 +1,13 @@
 const CreateTableRegions = `
     CREATE TABLE IF NOT EXISTS regions
     (
-        id              INTEGER PRIMARY KEY NOT NULL UNIQUE AUTOINCREMENT,
+        id              INTEGER PRIMARY KEY AUTOINCREMENT,
         region          TEXT NOT NULL UNIQUE,
         view_count      INTEGER NOT NULL DEFAULT 0,
-        last_view       INTEGER NOT NULL DEFAUL 0,
-        created_at      TEXT DEFAULT (DATETIME('now', 'LOCALTIME')),
-        updated_at      TEXT DEFAULT (DATETIME('now', 'LOCALTIME')),
-    )
+        last_view       INTEGER NOT NULL DEFAULT 0,
+        created_at      INTEGER NOT NULL DEFAULT (strftime('%s', 'now')),
+        updated_at      INTEGER NOT NULL DEFAULT (strftime('%s', 'now'))
+    );
 `;
 
 /**
@@ -15,7 +15,12 @@ const CreateTableRegions = `
  */
 const SelectRegions = `
     SELECT
-        *
+        id,
+        region,
+        view_count,
+        last_view,
+        created_at,
+        updated_at
     FROM
         regions
     ORDER BY
@@ -29,7 +34,11 @@ const SelectRegions = `
 const SelectRegionById = `
     SELECT
         id,
-        region
+        region,
+        view_count,
+        last_view,
+        created_at,
+        updated_at
     FROM
         regions
     WHERE id = ?;
@@ -49,9 +58,9 @@ const InsertRegion = `
         VALUES
     (
         ?,
-        DATETIME('now', 'LOCALTIME'),
-        DATETIME('now', 'LOCALTIME')
-    )
+        strftime('%s', 'now'),
+        strftime('%s', 'now')
+    );
 `;
 
 /**
@@ -62,7 +71,8 @@ const UpdateRegionViewCount = `
     UPDATE regions
     SET
         view_count = view_count + 1,
-        last_view = strftime('%s', 'now', 'localtime')
+        last_view = strftime('%s', 'now'),
+        updated_at = strftime('%s', 'now')
     WHERE 
         id = ?;
 `;
@@ -80,7 +90,7 @@ const ResetSequence = `
     DELETE FROM 
         sqlite_sequence
     WHERE 
-        name = "regions;
+        name = 'regions';
 `;
 
 const RegionQueries = Object.freeze({

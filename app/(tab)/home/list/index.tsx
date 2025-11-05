@@ -12,6 +12,7 @@ export default function ListScreen() {
     const navigation = useNavigation();
     const listData = useAppSelector((state: RootState) => state.initData.initListState);
     console.log(listData)
+    
     useEffect(() => {
         navigation.setOptions({
             headerBackVisible: true,

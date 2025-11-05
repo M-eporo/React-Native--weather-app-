@@ -18,7 +18,7 @@ export default function HomeScreenStack() {
                 title:"Home",
                 headerRight: () => <Button onPress={() => router.push("/(tab)/home/list")} title="List"/>  
             }}/>
-            <Stack.Screen name="list/index" options={{
+            <Stack.Screen name="list" options={{
                 title: "List",
                 headerRight: () => <Button onPress={() => router.back()} title="Back" />
             }}/>

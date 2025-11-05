@@ -20,12 +20,10 @@ export const ResponseModal = ({ showModal, setShowModal }: Props) => {
     
     const onPressAdd = async () => {
         try {
-            console.log(currentWeather.name);
             await regionService.addRegion(currentWeather.name);
             setShowModal(false);
-            router.replace("/('tab)/home");
         } catch(error) {
-            console.error(error.message);
+            console.error(error);
             Alert.alert("Error", "Failed to add new region.", [
                 {
                     text: "OK",

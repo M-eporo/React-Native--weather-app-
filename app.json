@@ -30,6 +30,6 @@
     "plugins": [
       "expo-router"
     ],
-    "schema": "weather-app"
+    "scheme": "weather-app"
   }
 }

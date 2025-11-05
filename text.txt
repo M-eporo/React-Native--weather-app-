@@ -186,7 +186,7 @@ Execute a transaction and automatically commit/rollback based on the task result
 Firestore、Sqliteの設定
 24時間天気の時間の設定がおかしい
 お気に入りリストの並び替え
-
+apiのデータ取得関数はエラーを戻り値として返せたほうがいいのか？
 
 *** 1 ***
 Expo router は、デフォルトエクスポートのReactコンポーネント出なければアンマッチルートになる

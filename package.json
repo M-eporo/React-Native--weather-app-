@@ -17,6 +17,7 @@
     "dotenv": "^17.2.2",
     "expo": "~54.0.9",
     "expo-constants": "~18.0.9",
+    "expo-file-system": "~19.0.17",
     "expo-linking": "~8.0.8",
     "expo-router": "~6.0.8",
     "expo-sqlite": "~16.0.8",

@@ -23,9 +23,9 @@ const getRegions = async (): Promise<FavoriteRegion[]> => {
             id: row.id,
             region: row.region,
             view_count: row.view_count,
-            last_view: row.last_view,
-            created_at: row.created_at,
-            updated_at: row.updated_at
+            last_view: new Date(row.last_view * 1000),
+            created_at: new Date(row.created_at * 1000),
+            updated_at: new Date(row.updated_at * 1000)
         };
     });
     return favoriteRegions;
@@ -50,13 +50,11 @@ const getRegionById = async (id: number): Promise<FavoriteRegion | undefined> =>
         id: region.id,
         region: region.region,
         view_count: region.view_count,
-        last_view: region.last_view,
-        created_at: region.created_at,
-        updated_at: region.updated_at
+        last_view: new Date(region.last_view * 1000),
+        created_at: new Date(region.created_at * 1000),
+        updated_at: new Date(region.updated_at * 1000)
     };
 };
-
-
 
 /**
  * お気に入り地域を追加
