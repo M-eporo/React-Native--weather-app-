@@ -1,25 +1,27 @@
 import axios, { AxiosError } from "axios";
 import Constants from "expo-constants";
 import { WeatherApiResponse } from "../../types/weatherApiResponse";
-import { useAppDispatch } from "../../store/hooks";
 import { TopWeatherItem } from "../../types/topWeather";
-import { setWeather } from "../../store/slices/topWeatherSlice";
-import { setWeeklyWeather } from "../../store/slices/weeklyWeatherSlice";
-import { setHourlyWeather } from "../../store/slices/hourlyWeatherSlice";
+import { HourlyWeatherItem } from "../../types/hourlyWeather";
+import { WeeklyWeatherItem } from "../../types/weeklyWeather";
+
+type FetchReturnType = {
+    topData: TopWeatherItem;
+    hourlyDataFormatted: HourlyWeatherItem[];
+    weeklyData: WeeklyWeatherItem[];
+}
 type FetchCurrentWeather = (
     location: string
-) => Promise<WeatherApiResponse>;
+) => Promise<FetchReturnType>;
 
 const { weatherApiKey } = Constants.expoConfig?.extra || {};
 
-// Errorを返せるほうがいい？
 export const getWeatherData: FetchCurrentWeather = async (location) => {
-    const dispatch = useAppDispatch();
     const URL = `https://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${location}&days=3&aqi=yes&alerts=yes`;
     try {
-        const data: WeatherApiResponse = await axios.get(URL);
+        const {data} = await axios.get<WeatherApiResponse>(URL);
 
-        const topData = {
+        const topData: TopWeatherItem = {
             name: data.location.name,
             country: data.location.country,
             temp_c: data.current.temp_c,
@@ -31,7 +33,7 @@ export const getWeatherData: FetchCurrentWeather = async (location) => {
 
         const currentTime = Number(data.location.localtime.substring(11,13));
             
-        const hourlyData = data.forecast.forecastday.flatMap((day, index) => {
+        const hourlyData = data.forecast.forecastday.flatMap((day, index: number) => {
             if(index === 0) {
                 return day.hour.slice(currentTime, day.hour.length);
             } else if(index === 1) {
@@ -41,7 +43,7 @@ export const getWeatherData: FetchCurrentWeather = async (location) => {
             }
         }).filter((hour) => hour !== undefined);
     
-        const hourlyDataFormatted = hourlyData.map((hour, index) => {
+        const hourlyDataFormatted: HourlyWeatherItem[] = hourlyData.map((hour, index: number) => {
             return {
                 time: index === 0 ? "Now" : hour.time.substring(11,13),
                 temp_c: hour.temp_c,
@@ -52,8 +54,7 @@ export const getWeatherData: FetchCurrentWeather = async (location) => {
                 chance_of_snow: hour.chance_of_snow,
             }
         });
-    
-        const weeklyData = data.forecast.forecastday.map((day, index) => {
+        const weeklyData: WeeklyWeatherItem[] = data.forecast.forecastday.map((day, index: number) => {
             return {
                 date: day.date,
                 dayofweek: new Date(day.date).toLocaleString("en-US", { weekday: "short"}),
@@ -77,11 +78,8 @@ export const getWeatherData: FetchCurrentWeather = async (location) => {
                 moon_phase: day.astro.moon_phase,
             };
         });
-        
-        dispatch(setWeather(topData));
-        dispatch(setHourlyWeather(hourlyDataFormatted));
-        dispatch(setWeeklyWeather(weeklyData));
-        return data;
+
+        return {topData, hourlyDataFormatted, weeklyData};
     } catch (error) {
         const err = error as AxiosError;
         throw new Error(err.response?.statusText || err.message);

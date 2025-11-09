@@ -3,8 +3,8 @@ type FavoriteRegionSchema = {
     region: string;
     view_count: number;
     last_view: number;
-    created_at: number;
-    updated_at: number;
+    created_at: string;
+    updated_at: string;
 }
 
 export type {FavoriteRegionSchema};

@@ -6,6 +6,7 @@ export default ({config}) => ({
         weatherApiKey: process.env.WEATHER_API_KEY
     },
     "plugins": [
-        "expo-sqlite"
+        "expo-sqlite",
+        "expo-router"
     ]
 });
