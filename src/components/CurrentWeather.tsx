@@ -3,6 +3,7 @@ import Input from "./Input";
 import { useAppSelector } from "../store/hooks";
 import { RootState } from "../store/store";
 
+
 const CurrentWeather = () => {
     const currentWeather = useAppSelector((state: RootState) => state.currentData.currentWeather);
     return (

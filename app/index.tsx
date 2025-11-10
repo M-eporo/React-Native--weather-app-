@@ -16,6 +16,7 @@ export default function InitScreen() {
         try {
             await regionService.createTable();
             const firstRegion = await initDatabase();
+
             if (firstRegion) { // 地域が存在する場合のみAPIを呼ぶ
                 const data = await getWeatherData(firstRegion);
                 dispatch(setWeather(data.topData));
