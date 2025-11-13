@@ -3,8 +3,13 @@ type FavoriteRegionSchema = {
     region: string;
     view_count: number;
     last_view: number;
-    created_at: string;
-    updated_at: string;
+    created_at: number;
+    updated_at: number;
 }
 
-export type {FavoriteRegionSchema};
+type CacheWeatherSchema = {
+    region_id: number;
+    payload: string;
+    fetched_at: number;
+}
+export type { FavoriteRegionSchema, CacheWeatherSchema };

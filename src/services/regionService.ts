@@ -13,6 +13,32 @@ const createTable = async () => {
 };
 
 /**
+ * キャッシュ用のテーブルを作成
+ */
+const createCacheTable = async () => {
+    console.log("Create Cache table...");
+    await execute({ sql: RegionQueries.CREATE_TABLE_CACHE_WEATHER});
+    console.log("Cache table created!");
+};
+
+/**
+ * テーブル更新時のトリガー
+ */
+const createTriggerOnUpdated = async () => {
+    console.log("Create Trigger on updated_at...");
+    await execute({ sql: RegionQueries.CREATE_TRIGGER_ON_UPDATED});
+    console.log("Trigger on updated_at created!");
+};
+
+/**
+ * regionsテーブルにインデックスを作成する
+ */
+const createIndexRegions = async () => {
+    console.log("Create Index on regions table...");
+    await execute({ sql: RegionQueries.CREATE_INDEX_REGIONS});
+    console.log("Index on regions created!");
+};
+/**
  * お気に入り地域をすべて取得
  * @returns お気に入り地域配列
  */
@@ -96,6 +122,9 @@ const resetSequence = async () => {
 
 export const regionService = Object.freeze({
     createTable,
+    createCacheTable,
+    createTriggerOnUpdated,
+    createIndexRegions,
     getRegions,
     getRegionById,
     addRegion,

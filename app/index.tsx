@@ -15,6 +15,9 @@ export default function InitScreen() {
     const initApp = async () => {
         try {
             await regionService.createTable();
+            await regionService.createCacheTable();
+            await regionService.createTriggerOnUpdated();
+            await regionService.createIndexRegions();
             const firstRegion = await initDatabase();
 
             if (firstRegion) { // 地域が存在する場合のみAPIを呼ぶ

@@ -20,7 +20,7 @@ export default function ListScreen() {
         navigation.setOptions({
             headerBackVisible: true,
             headerTitleAlign: "center",
-        })
+        });
     }, []);
 
     const handleDeletePress = async (item: FavoriteRegion) => {
@@ -46,6 +46,7 @@ export default function ListScreen() {
                 renderItem={({ item }) => (
                     <View style={styles.flatListItem}>
                         <Text>{item.region}</Text>
+                        
                         <AntDesign name="delete" size={24} color="black" onPress={() => handleDeletePress(item)}/>
                     </View>
                 )}

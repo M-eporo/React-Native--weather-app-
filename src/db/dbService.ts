@@ -16,6 +16,8 @@ const getDatabase = async (): Promise<SQLite.SQLiteDatabase> => {
     if (!dbInstance) {
         console.log('Opening database:', DB_NAME);
         dbInstance = await SQLite.openDatabaseAsync(DB_NAME);
+        await dbInstance.execAsync('PRAGMA journal_mode = WAL');
+        await dbInstance.execAsync('PRAGMA foreign_keys = ON');
         console.log('Database opened successfully');
     }
     return dbInstance;
@@ -84,47 +86,3 @@ const closeDatabase = async (): Promise<void> => {
 
 export {fetch, execute, getDatabase, closeDatabase};
 
-// const execute = async (...sqlArgs: sqlArg[]): Promise<void> => {
-//     const db = await getDatabase();
-//     console.log(`Executing ${sqlArgs.length} SQL statement(s) in transaction`);
-//     try {
-//         await db.withTransactionAsync(async () => {
-//             for (let i = 0; i < sqlArgs.length; i++) {
-//                 const sqlArg = sqlArgs[i];
-//                 const { sql, params } = sqlArg;
-//                 console.log(`[${i + 1}/${sqlArgs.length}] Executing SQL:`, sql);
-//                 console.log('With params:', params);
-//                 try {
-//                     const result = await db.runAsync(sql, ...(params || []));
-//                     console.log(`[${i + 1}/${sqlArgs.length}] Success:`, result);
-//                 } catch(error) {
-//                     console.error(`❌ [${i + 1}/${sqlArgs.length}] Execute error:`, error);
-//                     console.error('SQL:', sql);
-//                     console.error('Params:', params);
-//                     throw error;
-//                 }
-//             }
-//         });
-//         console.log('✅ Transaction completed successfully');
-//     } catch(error) {
-//         console.error('❌ Transaction failed:', error);
-//         throw error;
-//     }
-// };
-
-// /**
-//  * データベースファイルを削除（開発時のみ使用）
-//  */
-// export const deleteDatabase = async (): Promise<void> => {
-//     try {
-//         const dbPath = `${FileSystem.documentDirectory}SQLite/${DB_NAME}`;
-//         const fileInfo = await FileSystem.getInfoAsync(dbPath);
-        
-//         if (fileInfo.exists) {
-//             await FileSystem.deleteAsync(dbPath);
-//             console.log('Database deleted successfully');
-//         }
-//     } catch (error) {
-//         console.error('Error deleting database:', error);
-//     }
-// };
