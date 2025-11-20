@@ -101,8 +101,7 @@ const UpdateRegionViewCount = `
     UPDATE regions
     SET
         view_count = view_count + 1,
-        last_view = strftime('%s', 'now'),
-        updated_at = strftime('%s', 'now')
+        last_view = strftime('%s', 'now')
     WHERE 
         id = ?;
 `;
